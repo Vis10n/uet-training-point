@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 
 class Login extends Component {
@@ -21,26 +23,25 @@ class Login extends Component {
 
     render () {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-offset-5 col-md-3">
-                        <div className="form-login">
-                            <h4>UET-Training Point</h4>
-                            <input type="text" id="userName" className="form-control input-sm chat-input" placeholder="username" value={this.state.value} onChange={this.handleChange} />
-                            <br/>
-                            <input type="password" id="userPassword" className="form-control input-sm chat-input" placeholder="password" />
-                            <br/>
-                            <div className="wrapper">
-                                <span className="group-btn">     
-                                    <a type="submit" href="" className="btn btn-primary btn-md" onClick={this.handleSubmit}>
-                                        Login
-                                        <i className="fa fa-sign-in" />
-                                    </a>
-                                </span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="wrap">
+                            <p class="form-title">
+                                Login</p>
+                            <form class="login">
+                            <input type="text" placeholder="Username" />
+                            <input type="password" placeholder="Password" />
+                            <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
+                            <div class="remember-forgot">
+                                <div class="row">
+                                </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+                <div class="posted-by">Author: <a href="fb.com/Ng.Chien96">Vis10n</a></div>
             </div>
         );
     }
