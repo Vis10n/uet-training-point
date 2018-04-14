@@ -14,34 +14,30 @@ class Login extends Component {
     
     handleChange(event) {
         this.setState({value: event.target.value});
-      }
+    }
     
-      handleSubmit(event) {
-        console.log('A name was submitted: ' + this.state.value);
+    handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
-      }
+    }
 
     render () {
         return (
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="wrap">
-                            <p class="form-title">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="wrap">
+                            <p className="form-title">
                                 Login</p>
-                            <form class="login">
-                            <input type="text" placeholder="Username" />
+                            <form className="login" onSubmit={this.handleSubmit}>
+                            <input type="text" placeholder="Username" value={this.state.value} onChange={this.handleChange} />
                             <input type="password" placeholder="Password" />
-                            <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
-                            <div class="remember-forgot">
-                                <div class="row">
-                                </div>
-                            </div>
+                            <input type="submit" value="Sign In" className="btn btn-success btn-sm" />
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="posted-by">Author: <a href="fb.com/Ng.Chien96">Vis10n</a></div>
+                <div className="posted-by">Author: <a href="fb.com/Ng.Chien96">Vis10n</a></div>
             </div>
         );
     }
