@@ -1,0 +1,104 @@
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+import '../css/Login.css';
+import HomeCoVanHocTap from './coVanHocTap/HomeCoVanHocTap';
+import HomeLopTruong from './lopTruong/HomeLopTruong';
+import HomeSinhVien from './sinhVien/HomeSinhVien';
+
+
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+
+    this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChangeUsername(event) {
+    this.setState({
+      username: event.target.value
+    });
+    console.log(this.state.username);
+    
+  }
+
+  handleChangePassword(event) {
+    this.setState({
+      password: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    //console.log('A name was submitted: ' + this.state.username);
+
+    if (this.state.username === "sinhvien" && this.state.password === "1") {
+      ReactDOM.render(<HomeSinhVien />, document.getElementById("root"));
+    } else if (this.state.username === "loptruong" && this.state.password === "1") {
+      ReactDOM.render(<HomeLopTruong />, document.getElementById("root"));
+    } else if (this.state.username === "covanhoctap" && this.state.password === "1") {
+      ReactDOM.render(<HomeCoVanHocTap />, document.getElementById("root"));
+    } 
+
+    else {
+      alert("Username or password is incorrect!");
+    }
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form className="form-signin">
+        <div className="text-center mb-4">
+          <img
+            className="mb-4"
+            src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg"
+            alt=""
+            width="72"
+            height="72"
+          />
+          <h1 className="h3 mb-3 font-weight-normal">UET training point</h1>
+          <p>Team 13 - University of Engineering and Technology</p>
+        </div>
+
+        <div className="form-label-group">
+          <input
+            type="text"
+            id="inputEmail"
+            className="form-control"
+            placeholder="Email address"
+            required
+            autofocus
+            value={this.state.username} onChange={this.handleChangeUsername}
+          />
+          <label for="inputEmail">Username</label>
+        </div>
+
+        <div className="form-label-group">
+          <input
+            type="password"
+            id="inputPassword"
+            className="form-control"
+            placeholder="Password"
+            required
+            value={this.state.password} onChange={this.handleChangePassword}
+          />
+          <label for="inputPassword">Password</label>
+        </div>
+
+        <button className="btn btn-lg btn-primary btn-block" type="submit" onClick = {this.handleSubmit}>
+          Login
+        </button>
+        <p className="mt-5 mb-3 text-muted text-center">
+          NguyenTuanAnh - NguyenChuChien - TranMinhChien
+        </p>
+      </form>
+    );
+  }
+}
+export default Login;
