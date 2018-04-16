@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-
+import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './Login.css';
+
+import Test from './Test';
 
 class Login extends Component {
     constructor(props) {
@@ -32,8 +34,12 @@ class Login extends Component {
     handleSubmit(event) {
         //console.log('A name was submitted: ' + this.state.username);
         
-        if (this.state.username === 'Vision' || this.state.password === '123456') {
+        if (this.state.username === 'Vision' && this.state.password === '123456') {
             alert("Login Successfully!");
+            ReactDOM.render(
+                <Test />,
+                document.getElementById('root')
+            );
         }
         else {
             alert("Username or password is incorrect!");
@@ -57,7 +63,7 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="posted-by">Author: <a href="fb.com/Ng.Chien96">Vis10n</a></div>
+                <div className="posted-by">Author: <a href="https://fb.com/Ng.Chien96">Vis10n</a></div>
             </div>
         );
     }
