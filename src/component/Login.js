@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import '../css/Login.css';
-import HomeCoVanHocTap from './coVanHocTap/HomeCoVanHocTap';
-import HomeLopTruong from './lopTruong/HomeLopTruong';
-import HomeSinhVien from './sinhVien/HomeSinhVien';
-
+import "../css/Login.css";
+import HomeCoVanHocTap from "./coVanHocTap/HomeCoVanHocTap";
+import HomeLopTruong from "./lopTruong/HomeLopTruong";
+import HomeSinhVien from "./sinhVien/HomeSinhVien";
+import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
@@ -24,30 +24,59 @@ class Login extends Component {
     this.setState({
       username: event.target.value
     });
-    console.log(this.state.username);
-    
+    console.log("user" + this.state.username);
   }
 
   handleChangePassword(event) {
     this.setState({
       password: event.target.value
     });
+    console.log("pass" + this.state.password);
   }
 
   handleSubmit(event) {
-    //console.log('A name was submitted: ' + this.state.username);
+    axios
+      .post("https://training-point.herokuapp.com/login", {
+        code: this.state.username,
+        password: this.state.password
+      })
+      .then(function(response) {
+        var token = response.data.token;
+        var role = response.data.role;
 
-    if (this.state.username === "sinhvien" && this.state.password === "1") {
-      ReactDOM.render(<HomeSinhVien />, document.getElementById("root"));
-    } else if (this.state.username === "loptruong" && this.state.password === "1") {
-      ReactDOM.render(<HomeLopTruong />, document.getElementById("root"));
-    } else if (this.state.username === "covanhoctap" && this.state.password === "1") {
-      ReactDOM.render(<HomeCoVanHocTap />, document.getElementById("root"));
-    } 
+        console.log(token);
+        console.log(role);
+        
 
-    else {
-      alert("Username or password is incorrect!");
-    }
+        if (response.data.role === "student") {
+          ReactDOM.render(
+            <HomeSinhVien
+              token={response.data.token}
+              role={response.data.role}
+            />,
+            document.getElementById("root")
+          );
+        } else if (response.data.role === "monitor") {
+          ReactDOM.render(
+            <HomeLopTruong
+              token={response.data.token}
+              role={response.data.role}
+            />,
+            document.getElementById("root")
+          );
+        } else if (response.data.role === "teacher") {
+          ReactDOM.render(
+            <HomeCoVanHocTap
+              token={response.data.token}
+              role={response.data.role}
+            />,
+            document.getElementById("root")
+          );
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
     event.preventDefault();
   }
 
@@ -74,7 +103,8 @@ class Login extends Component {
             placeholder="Email address"
             required
             autofocus
-            value={this.state.username} onChange={this.handleChangeUsername}
+            value={this.state.username}
+            onChange={this.handleChangeUsername}
           />
           <label for="inputEmail">Username</label>
         </div>
@@ -86,12 +116,17 @@ class Login extends Component {
             className="form-control"
             placeholder="Password"
             required
-            value={this.state.password} onChange={this.handleChangePassword}
+            value={this.state.password}
+            onChange={this.handleChangePassword}
           />
           <label for="inputPassword">Password</label>
         </div>
 
-        <button className="btn btn-lg btn-primary btn-block" type="submit" onClick = {this.handleSubmit}>
+        <button
+          className="btn btn-lg btn-primary btn-block"
+          type="submit"
+          onClick={this.handleSubmit}
+        >
           Login
         </button>
         <p className="mt-5 mb-3 text-muted text-center">
