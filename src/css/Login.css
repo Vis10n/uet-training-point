@@ -8,7 +8,11 @@ body {
   height: 100%;
 }
 
+<<<<<<< HEAD
+.main-div-login {
+=======
 .main-login {
+>>>>>>> ac49de3fb0d1f9248b0b54f5927d1d46786ae890
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex;
