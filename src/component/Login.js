@@ -40,7 +40,11 @@ class Login extends Component {
       })
       .then(function(response) {
         console.log(response);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> ac49de3fb0d1f9248b0b54f5927d1d46786ae890
         if (response.data.role === "student") {
           ReactDOM.render(
             <HomeSinhVien
@@ -75,6 +79,7 @@ class Login extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="main-div-login">
       <form className="form-signin">
         <div className="text-center mb-4">
@@ -88,34 +93,50 @@ class Login extends Component {
           <h1 className="h3 mb-3 font-weight-normal">UET training point</h1>
           <p>Team 13 - University of Engineering and Technology</p>
         </div>
+=======
+      <div className="main-login" >
+        <form className="form-signin">
+          <div className="text-center mb-4">
+            <img
+              className="mb-4"
+              src="https://ih1.redbubble.net/image.481229463.9121/flat,800x800,070,f.u1.jpg"
+              alt=""
+              width="72"
+              height="72"
+            />
+            <h1 className="h3 mb-3 font-weight-normal">UET training point</h1>
+            <p>Team 13 - University of Engineering and Technology</p>
+          </div>
+>>>>>>> ac49de3fb0d1f9248b0b54f5927d1d46786ae890
 
-        <div className="form-label-group">
-          <input
-            type="text"
-            id="inputEmail"
-            className="form-control"
-            placeholder="Email address"
-            required
-            autofocus
-            value={this.state.username}
-            onChange={this.handleChangeUsername}
-          />
-          <label for="inputEmail">Username</label>
-        </div>
+          <div className="form-label-group">
+            <input
+              type="text"
+              id="inputEmail"
+              className="form-control"
+              placeholder="Email address"
+              required
+              autofocus
+              value={this.state.username}
+              onChange={this.handleChangeUsername}
+            />
+            <label for="inputEmail">Username</label>
+          </div>
 
-        <div className="form-label-group">
-          <input
-            type="password"
-            id="inputPassword"
-            className="form-control"
-            placeholder="Password"
-            required
-            value={this.state.password}
-            onChange={this.handleChangePassword}
-          />
-          <label for="inputPassword">Password</label>
-        </div>
+          <div className="form-label-group">
+            <input
+              type="password"
+              id="inputPassword"
+              className="form-control"
+              placeholder="Password"
+              required
+              value={this.state.password}
+              onChange={this.handleChangePassword}
+            />
+            <label for="inputPassword">Password</label>
+          </div>
 
+<<<<<<< HEAD
         <button
           className="btn btn-lg btn-primary btn-block"
           type="submit"
@@ -127,6 +148,20 @@ class Login extends Component {
           NguyenTuanAnh - NguyenChuChien - TranMinhChien
         </p>
       </form>
+=======
+          <button
+            className="btn btn-lg btn-primary btn-block"
+            type="submit"
+            onClick={this.handleSubmit}
+          >
+            Login
+          </button>
+          <p className="mt-5 mb-3 text-muted text-center">
+            Authors <br/>
+            TuanAnhNguyen - ChienNguyenChu - ChienTranMinh
+          </p>
+        </form>
+>>>>>>> ac49de3fb0d1f9248b0b54f5927d1d46786ae890
       </div>
     );
   }
