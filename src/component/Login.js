@@ -24,14 +24,12 @@ class Login extends Component {
     this.setState({
       username: event.target.value
     });
-    console.log("user" + this.state.username);
   }
 
   handleChangePassword(event) {
     this.setState({
       password: event.target.value
     });
-    console.log("pass" + this.state.password);
   }
 
   handleSubmit(event) {
@@ -41,12 +39,7 @@ class Login extends Component {
         password: this.state.password
       })
       .then(function(response) {
-        var token = response.data.token;
-        var role = response.data.role;
-
-        console.log(token);
-        console.log(role);
-        
+        console.log(response);
 
         if (response.data.role === "student") {
           ReactDOM.render(
@@ -82,6 +75,7 @@ class Login extends Component {
 
   render() {
     return (
+      <div className="main-div-login">
       <form className="form-signin">
         <div className="text-center mb-4">
           <img
@@ -133,6 +127,7 @@ class Login extends Component {
           NguyenTuanAnh - NguyenChuChien - TranMinhChien
         </p>
       </form>
+      </div>
     );
   }
 }

@@ -8,7 +8,7 @@ body {
   height: 100%;
 }
 
-body {
+.main-div-login {
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex;
