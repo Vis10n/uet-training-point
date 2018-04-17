@@ -40,11 +40,7 @@ class Login extends Component {
       })
       .then(function(response) {
         console.log(response);
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> ac49de3fb0d1f9248b0b54f5927d1d46786ae890
         if (response.data.role === "student") {
           ReactDOM.render(
             <HomeSinhVien
@@ -79,21 +75,6 @@ class Login extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <div className="main-div-login">
-      <form className="form-signin">
-        <div className="text-center mb-4">
-          <img
-            className="mb-4"
-            src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg"
-            alt=""
-            width="72"
-            height="72"
-          />
-          <h1 className="h3 mb-3 font-weight-normal">UET training point</h1>
-          <p>Team 13 - University of Engineering and Technology</p>
-        </div>
-=======
       <div className="main-login" >
         <form className="form-signin">
           <div className="text-center mb-4">
@@ -107,7 +88,6 @@ class Login extends Component {
             <h1 className="h3 mb-3 font-weight-normal">UET training point</h1>
             <p>Team 13 - University of Engineering and Technology</p>
           </div>
->>>>>>> ac49de3fb0d1f9248b0b54f5927d1d46786ae890
 
           <div className="form-label-group">
             <input
@@ -136,19 +116,6 @@ class Login extends Component {
             <label for="inputPassword">Password</label>
           </div>
 
-<<<<<<< HEAD
-        <button
-          className="btn btn-lg btn-primary btn-block"
-          type="submit"
-          onClick={this.handleSubmit}
-        >
-          Login
-        </button>
-        <p className="mt-5 mb-3 text-muted text-center">
-          NguyenTuanAnh - NguyenChuChien - TranMinhChien
-        </p>
-      </form>
-=======
           <button
             className="btn btn-lg btn-primary btn-block"
             type="submit"
@@ -161,7 +128,6 @@ class Login extends Component {
             TuanAnhNguyen - ChienNguyenChu - ChienTranMinh
           </p>
         </form>
->>>>>>> ac49de3fb0d1f9248b0b54f5927d1d46786ae890
       </div>
     );
   }
