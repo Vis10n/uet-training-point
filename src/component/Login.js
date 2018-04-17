@@ -41,13 +41,8 @@ class Login extends Component {
         password: this.state.password
       })
       .then(function(response) {
-        var token = response.data.token;
-        var role = response.data.role;
-
-        console.log(token);
-        console.log(role);
+        console.log(response);
         
-
         if (response.data.role === "student") {
           ReactDOM.render(
             <HomeSinhVien
