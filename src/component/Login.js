@@ -36,26 +36,26 @@ class Login extends Component {
     console.log("didmount");
     console.log(localStorage.getItem("role"));
     let b = localStorage.getItem("role");
-    console.log("b = "+b);
-    
+    console.log("b = " + b);
+
     if (b != null) {
-      let a= JSON.parse(localStorage.getItem("role"))
+      let a = JSON.parse(localStorage.getItem("role"));
       let role = a[0];
       let token = a[1];
       let username = a[2];
       if (role === "student") {
         ReactDOM.render(
-          <HomeSinhVien role={role} token={token} username={username}/>,
+          <HomeSinhVien role={role} token={token} username={username} />,
           document.getElementById("root")
         );
       } else if (role === "monitor") {
         ReactDOM.render(
-          <HomeLopTruong role={role} token={token}/>,
+          <HomeLopTruong role={role} token={token} />,
           document.getElementById("root")
         );
       } else if (role === "teacher") {
         ReactDOM.render(
-          <HomeCoVanHocTap role={role} token={token}/>,
+          <HomeCoVanHocTap role={role} token={token} />,
           document.getElementById("root")
         );
       }
@@ -68,20 +68,27 @@ class Login extends Component {
         code: this.state.username,
         password: this.state.password
       })
-      .then(function(response) {
+      .then(response => {
         console.log(response);
         // var usernameProp = this.state.username;
         // console.log(usernameProp);
-        
-        var dataSave = [response.data.role, response.data.token];
+        console.log(this.state.username);
+
+        var dataSave = [
+          response.data.role,
+          response.data.token,
+          this.state.username
+        ];
+        console.log(dataSave[2]);
+
         localStorage.setItem("role", JSON.stringify(dataSave));
-        
+
         if (response.data.role === "student") {
           ReactDOM.render(
             <HomeSinhVien
               token={response.data.token}
               role={response.data.role}
-              // username = {usernameProp}
+              username={this.state.username}
             />,
             document.getElementById("root")
           );
@@ -90,7 +97,6 @@ class Login extends Component {
             <HomeLopTruong
               token={response.data.token}
               role={response.data.role}
-              
             />,
             document.getElementById("root")
           );
@@ -99,7 +105,6 @@ class Login extends Component {
             <HomeCoVanHocTap
               token={response.data.token}
               role={response.data.role}
-             
             />,
             document.getElementById("root")
           );

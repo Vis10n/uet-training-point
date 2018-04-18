@@ -10,9 +10,9 @@ class HomeSinhVien extends Component {
     this.state = {
       token: this.props.token,
       role: this.props.role,
-      usename: this.props.usename,
+      usename: this.props.username,
 
-      pointId : null,
+      pointId: null,
       point1Student: 0,
       point2Student: 0,
       point3Student: 0,
@@ -20,26 +20,118 @@ class HomeSinhVien extends Component {
       point2Monitor: 0,
       point3Monitor: 0,
       message: null,
+      messageNew: null,
 
       student_verify: false,
       monitor_verify: false,
-      teacher_verify: false
+      teacher_verify: false,
+
     };
     this.signOut = this.signOut.bind(this);
     this.sendInfo = this.sendInfo.bind(this);
+    this.ShowInfo = this.ShowInfo.bind(this);
+    this.handlePoint1 = this.handlePoint1.bind(this);
+    this.handlePoint2 = this.handlePoint2.bind(this);
+    this.handlePoint3 = this.handlePoint3.bind(this);
+    this.handleMessage = this.handleMessage.bind(this);
   }
 
-  sendInfo() {
+  validatePoint(point){
+    if (point<0) {
+      return 0
+    } else if (point > 100){
+      return 100
+    } else {
+      return point
+    }
+  }
+
+  validateMess(mess){
+    return mess.trim();
+  }
+
+  handleMessage(event) {
+    let mess = this.validateMess(event.target.value)
+    this.setState({
+      messageNew: mess
+    });
+  }
+  handlePoint1(event) {
+    let point = this.validatePoint(event.target.value)
+    this.setState({
+      point1Student: point
+    });
+    console.log("point 1" + this.state.point1Student);
+  }
+  handlePoint2(event) {
+    let point = this.validatePoint(event.target.value)
+    this.setState({
+      point2Student: point
+    });
+  }
+  handlePoint3(event) {
+    let point = this.validatePoint(event.target.value)
+    this.setState({
+      point3Student: point
+    });
+  }
+
+  ShowInfo = data => {
+    console.log(data);
+  };
+
+  getAPI() {
+    console.log("getapi");
+
     axios
-      .post("https://training-point.herokuapp.com/submit", {
-        point_id: this.state.pointId,
-        point1: this.state.point1Student,
-        point2: this.state.point2Student,
-        point3: this.state.point3Student,
-        message: this.state.message
+      .get("https://training-point.herokuapp.com/get_form", {
+        headers: { token: this.state.token }
       })
-      .then(function(response) {
-        console.log(response);
+      .then(response => {
+        let data = response.data.point;
+        console.log(data);
+
+        this.setState({
+          pointId: data.id,
+          point1Student: data.point1,
+          point2Student: data.point2,
+          point3Student: data.point3,
+          point1Monitor: data.point1_monitor,
+          point2Monitor: data.point2_monitor,
+          point3Monitor: data.point3_monitor,
+          message: data.message,
+          student_verify: data.student_verify,
+          monitor_verify: data.monitor_verify,
+          teacher_verify: data.monitor_verify
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+  sendInfo() {
+    console.log("post");
+
+    axios
+      .post(
+        "https://training-point.herokuapp.com/submit",
+        {
+          point_id: this.state.pointId,
+          point1: this.state.point1Student,
+          point2: this.state.point2Student,
+          point3: this.state.point3Student,
+          message: this.state.messageNew
+        },
+        { headers: { token: this.state.token } }
+      )
+      .then(response => {
+        console.log(response.status);
+        if (response.status === 200) {
+          alert("Đã gửi thành công.");
+          this.getAPI();
+        } else {
+          alert("Lỗi");
+        }
       })
       .catch(function(error) {
         console.log(error);
@@ -48,19 +140,12 @@ class HomeSinhVien extends Component {
 
   componentDidMount() {
     //check da lam don chua tai day
-    console.log("đimount");
+    console.log("didmount");
     console.log("token " + this.state.token);
     console.log("role " + this.state.role);
-    // console.log("usename " + this.state.usename);
+    console.log("usename " + this.state.usename);
 
-    axios
-      .get("https://training-point.herokuapp.com/get_form")
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    this.getAPI();
   }
 
   signOut() {
@@ -92,7 +177,8 @@ class HomeSinhVien extends Component {
               <div className="sidebar-sticky">
                 <ul className="nav flex-column">
                   <li className="nav-item">
-                    <a className="nav-link">Thông báo</a>
+                    <a className="nav-link">Sinh Viên</a>
+                    
                   </li>
                 </ul>
               </div>
@@ -102,8 +188,7 @@ class HomeSinhVien extends Component {
               role="main"
               className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"
             >
-              {/* <h2>Điểm rèn luyện</h2> */}
-
+              <h4>Mã số sinh viên: {this.state.usename}</h4><br/>
               <h5>Trạng thái đơn</h5>
               <br />
               <p>
@@ -140,7 +225,8 @@ class HomeSinhVien extends Component {
                           type="number"
                           className="form-control"
                           id="exampleFormControlInput1"
-                          placeholder={this.state.point1Student}
+                          value={this.state.point1Student}
+                          onChange={this.handlePoint1}
                         />
                       </td>
                       <td>{this.state.point1Monitor}</td>
@@ -153,7 +239,8 @@ class HomeSinhVien extends Component {
                           type="number"
                           className="form-control"
                           id="exampleFormControlInput1"
-                          placeholder={this.state.point2Student}
+                          value={this.state.point2Student}
+                          onChange={this.handlePoint2}
                         />
                       </td>
                       <td>{this.state.point2Monitor}</td>
@@ -166,13 +253,26 @@ class HomeSinhVien extends Component {
                           type="number"
                           className="form-control"
                           id="exampleFormControlInput1"
-                          placeholder={this.state.point3Student}
+                          value={this.state.point3Student}
+                          onChange={this.handlePoint3}
                         />
                       </td>
                       <td>{this.state.point3Monitor}</td>
                     </tr>
                   </tbody>
                 </table>
+                <p>Ghi chú: {this.state.message}</p>
+                <p>
+                  Viết nhận xét{" "}
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    onChange={this.handleMessage}
+                  />
+                </p>
+
+                <br />
                 <button
                   type="button"
                   className="btn btn-success"
