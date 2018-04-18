@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-
-=======
 import ReactDOM from "react-dom";
 
 //css
@@ -10,7 +7,6 @@ import "./css/dashboard.css";
 
 //JS Components
 import Login from "../Login";
->>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
 class HomeLopTruong extends Component {
     constructor(props) {
         super(props);
@@ -19,15 +15,6 @@ class HomeLopTruong extends Component {
             role : this.props.role
         };
     
-<<<<<<< HEAD
-      }
-    
-      render() {
-        return <div>
-            
-            <p>{this.state.token}</p>
-            <p>{this.state.role}</p>
-=======
     }
 
     signOut() {
@@ -185,7 +172,6 @@ class HomeLopTruong extends Component {
                         </main>
                     </div>
                 </div>
->>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
             </div>;
       }
 }

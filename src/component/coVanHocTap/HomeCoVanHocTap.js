@@ -3,11 +3,7 @@ import ReactDOM from "react-dom";
 import Login from "../Login";
 // css
 import "./css/bootstrap.css";
-<<<<<<< HEAD
-import "./css/dashboard.css";
-=======
 import "./css/HomeCoVanHocTap.css";
->>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
 
 class HomeCoVanHocTap extends Component {
   constructor(props) {
@@ -21,14 +17,6 @@ class HomeCoVanHocTap extends Component {
   componentDidMount() {
     //check da lam don chua tai day
   }
-<<<<<<< HEAD
-
-  signOut() {
-    console.log(localStorage.getItem("role"));
-    localStorage.removeItem("role");
-    console.log(localStorage.getItem("role"));
-    ReactDOM.render(<Login />, document.getElementById("root"));
-=======
   
   signOut() {
     // console.log(localStorage.getItem("role"));
@@ -38,7 +26,6 @@ class HomeCoVanHocTap extends Component {
       <Login />,
        document.getElementById("root")
     );
->>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
   }
 
   render() {
@@ -51,11 +38,7 @@ class HomeCoVanHocTap extends Component {
           {/* <input className="form-control form-control-dark w-100" placeholder="Search" aria-label="Search" type="text"/> */}
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap">
-<<<<<<< HEAD
-              <a className="nav-link" onClick={this.signOut}>
-=======
               <a className="nav-link" href="" onClick={this.signOut}>
->>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
                 Sign out
               </a>
             </li>
@@ -185,11 +168,7 @@ class HomeCoVanHocTap extends Component {
               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 class="h2">Notification</h1>
               </div>
-<<<<<<< HEAD
-              <div id="main-co-van">
-=======
               <div id="main-teacher">
->>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
                 <p>Time to party :D</p>
               </div>
             </main>
