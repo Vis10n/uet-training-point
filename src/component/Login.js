@@ -12,7 +12,8 @@ class Login extends Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      role: null
     };
 
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -24,6 +25,29 @@ class Login extends Component {
     this.setState({
       username: event.target.value
     });
+  }
+
+  componentDidMount() {
+    console.log("didmount");
+
+    console.log(localStorage.getItem("role"));
+    var roleLocal = localStorage.getItem("role");
+    if (roleLocal === "student") {
+      ReactDOM.render(
+        <HomeSinhVien role={roleLocal} />,
+        document.getElementById("root")
+      );
+    } else if (roleLocal === "monitor") {
+      ReactDOM.render(
+        <HomeLopTruong role={roleLocal} />,
+        document.getElementById("root")
+      );
+    } else if (roleLocal === "teacher") {
+      ReactDOM.render(
+        <HomeCoVanHocTap role={roleLocal} />,
+        document.getElementById("root")
+      );
+    }
   }
 
   handleChangePassword(event) {
@@ -40,6 +64,8 @@ class Login extends Component {
       })
       .then(function(response) {
         console.log(response);
+        localStorage.setItem("role", response.data.role),
+          console.log(localStorage.getItem("role"));
 
         if (response.data.role === "student") {
           ReactDOM.render(
@@ -74,8 +100,10 @@ class Login extends Component {
   }
 
   render() {
+    console.log("render");
+
     return (
-      <div className="main-login" >
+      <div className="main-login">
         <form className="form-signin">
           <div className="text-center mb-4">
             <img
@@ -124,7 +152,7 @@ class Login extends Component {
             Login
           </button>
           <p className="mt-5 mb-3 text-muted text-center">
-            Authors <br/>
+            Authors <br />
             TuanAnhNguyen - ChienNguyenChu - ChienTranMinh
           </p>
         </form>
