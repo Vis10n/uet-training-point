@@ -27,33 +27,39 @@ class Login extends Component {
     });
   }
 
-  componentDidMount() {
-    console.log("didmount");
-
-    console.log(localStorage.getItem("role"));
-    var roleLocal = localStorage.getItem("role");
-    if (roleLocal === "student") {
-      ReactDOM.render(
-        <HomeSinhVien role={roleLocal} />,
-        document.getElementById("root")
-      );
-    } else if (roleLocal === "monitor") {
-      ReactDOM.render(
-        <HomeLopTruong role={roleLocal} />,
-        document.getElementById("root")
-      );
-    } else if (roleLocal === "teacher") {
-      ReactDOM.render(
-        <HomeCoVanHocTap role={roleLocal} />,
-        document.getElementById("root")
-      );
-    }
-  }
-
   handleChangePassword(event) {
     this.setState({
       password: event.target.value
     });
+  }
+  componentDidMount() {
+    console.log("didmount");
+    console.log(localStorage.getItem("role"));
+    let b = localStorage.getItem("role");
+    console.log("b = "+b);
+    
+    if (b != null) {
+      let a= JSON.parse(localStorage.getItem("role"))
+      let role = a[0];
+      let token = a[1];
+      let username = a[2];
+      if (role === "student") {
+        ReactDOM.render(
+          <HomeSinhVien role={role} token={token} username={username}/>,
+          document.getElementById("root")
+        );
+      } else if (role === "monitor") {
+        ReactDOM.render(
+          <HomeLopTruong role={role} token={token}/>,
+          document.getElementById("root")
+        );
+      } else if (role === "teacher") {
+        ReactDOM.render(
+          <HomeCoVanHocTap role={role} token={token}/>,
+          document.getElementById("root")
+        );
+      }
+    }
   }
 
   handleSubmit(event) {
@@ -64,14 +70,18 @@ class Login extends Component {
       })
       .then(function(response) {
         console.log(response);
-        localStorage.setItem("role", response.data.role),
-          console.log(localStorage.getItem("role"));
-
+        // var usernameProp = this.state.username;
+        // console.log(usernameProp);
+        
+        var dataSave = [response.data.role, response.data.token];
+        localStorage.setItem("role", JSON.stringify(dataSave));
+        
         if (response.data.role === "student") {
           ReactDOM.render(
             <HomeSinhVien
               token={response.data.token}
               role={response.data.role}
+              // username = {usernameProp}
             />,
             document.getElementById("root")
           );
@@ -80,6 +90,7 @@ class Login extends Component {
             <HomeLopTruong
               token={response.data.token}
               role={response.data.role}
+              
             />,
             document.getElementById("root")
           );
@@ -88,6 +99,7 @@ class Login extends Component {
             <HomeCoVanHocTap
               token={response.data.token}
               role={response.data.role}
+             
             />,
             document.getElementById("root")
           );
