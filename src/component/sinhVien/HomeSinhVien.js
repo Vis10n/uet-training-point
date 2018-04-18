@@ -10,7 +10,7 @@ class HomeSinhVien extends Component {
     this.state = {
       token: this.props.token,
       role: this.props.role,
-      usename: this.props.username,
+      username: this.props.username,
 
       pointId: null,
       point1Student: 0,
@@ -101,12 +101,14 @@ class HomeSinhVien extends Component {
           message: data.message,
           student_verify: data.student_verify,
           monitor_verify: data.monitor_verify,
-          teacher_verify: data.monitor_verify
+          teacher_verify: data.monitor_verify,
+          student_name: data.user_name
         });
       })
       .catch(function(error) {
         console.log(error);
       });
+    console.log("get done");
   }
   sendInfo() {
     console.log("post");
@@ -142,7 +144,7 @@ class HomeSinhVien extends Component {
     console.log("didmount");
     console.log("token " + this.state.token);
     console.log("role " + this.state.role);
-    console.log("usename " + this.state.usename);
+    console.log("username " + this.state.username);
 
     this.getAPI();
   }
@@ -191,23 +193,25 @@ class HomeSinhVien extends Component {
       />
     );
 
-    const inputComment = this.state.student_verify ? (null) : (<div>
-      <p>Viết nhận xét</p>
-      <input
-        type="text"
-        className="form-control"
-        id="exampleFormControlInput1"
-        onChange={this.handleMessage}
-      />
-      <br />
-      <button
-        type="button"
-        className="btn btn-success"
-        onClick={this.sendInfo}
-      >
-        Gửi cho lớp trưởng
-      </button>
-    </div>);
+    const inputComment = this.state.student_verify ? null : (
+      <div>
+        <p>Viết nhận xét</p>
+        <input
+          type="text"
+          className="form-control"
+          id="exampleFormControlInput1"
+          onChange={this.handleMessage}
+        />
+        <br />
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={this.sendInfo}
+        >
+          Gửi cho lớp trưởng
+        </button>
+      </div>
+    );
 
     return (
       <div>
@@ -240,10 +244,13 @@ class HomeSinhVien extends Component {
               role="main"
               className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"
             >
-              <h4>Mã số sinh viên: {this.state.usename}</h4>
+              <h4>
+                Họ tên : {this.state.student_name} - {this.state.username}
+              </h4>
               <br />
               <h5>Trạng thái đơn</h5>
               <br />
+
               <p>
                 {" "}
                 Sinh viên:{" "}
@@ -263,9 +270,10 @@ class HomeSinhVien extends Component {
                   ? "đã xác nhận"
                   : "chưa xác nhận"}{" "}
               </p>
+              <p>Ghi chú: {this.state.message}</p>
               <br />
               <div className="table-responsive">
-                <table className="table">
+                <table className="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">STT</th>
@@ -295,8 +303,13 @@ class HomeSinhVien extends Component {
                     </tr>
                   </tbody>
                 </table>
-                <p>Ghi chú: {this.state.message}</p>
-                {inputComment}
+                <div className="container">
+                  <div className="row">
+                    <div className="col-sm-2" />
+                    <div className="col-sm-8">{inputComment}</div>
+                    <div className="col-sm-2" />
+                  </div>
+                </div>
               </div>
             </main>
           </div>
