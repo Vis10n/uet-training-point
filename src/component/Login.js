@@ -68,6 +68,7 @@ class Login extends Component {
         code: this.state.username,
         password: this.state.password
       })
+<<<<<<< HEAD
       .then((response) =>{
         console.log(response);
         // var usernameProp = this.state.username;
@@ -77,6 +78,14 @@ class Login extends Component {
         var dataSave = [response.data.role, response.data.token,this.state.username];
         console.log(dataSave[2]);
         
+=======
+      .then(function(response) {
+        console.log(response);
+        // var usernameProp = this.state.username;
+        // console.log(usernameProp);
+        
+        var dataSave = [response.data.role, response.data.token];
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
         localStorage.setItem("role", JSON.stringify(dataSave));
         
         if (response.data.role === "student") {
@@ -84,7 +93,11 @@ class Login extends Component {
             <HomeSinhVien
               token={response.data.token}
               role={response.data.role}
+<<<<<<< HEAD
               username = {this.state.username}
+=======
+              // username = {usernameProp}
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
             />,
             document.getElementById("root")
           );

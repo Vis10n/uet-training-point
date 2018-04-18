@@ -10,9 +10,15 @@ class HomeSinhVien extends Component {
     this.state = {
       token: this.props.token,
       role: this.props.role,
+<<<<<<< HEAD
       usename: this.props.username,
 
       pointId: null,
+=======
+      usename: this.props.usename,
+
+      pointId : null,
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
       point1Student: 0,
       point2Student: 0,
       point3Student: 0,
@@ -20,6 +26,7 @@ class HomeSinhVien extends Component {
       point2Monitor: 0,
       point3Monitor: 0,
       message: null,
+<<<<<<< HEAD
       messageNew: null,
 
       student_verify: false,
@@ -132,6 +139,28 @@ class HomeSinhVien extends Component {
         } else {
           alert("Lỗi");
         }
+=======
+
+      student_verify: false,
+      monitor_verify: false,
+      teacher_verify: false
+    };
+    this.signOut = this.signOut.bind(this);
+    this.sendInfo = this.sendInfo.bind(this);
+  }
+
+  sendInfo() {
+    axios
+      .post("https://training-point.herokuapp.com/submit", {
+        point_id: this.state.pointId,
+        point1: this.state.point1Student,
+        point2: this.state.point2Student,
+        point3: this.state.point3Student,
+        message: this.state.message
+      })
+      .then(function(response) {
+        console.log(response);
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
       })
       .catch(function(error) {
         console.log(error);
@@ -140,12 +169,28 @@ class HomeSinhVien extends Component {
 
   componentDidMount() {
     //check da lam don chua tai day
+<<<<<<< HEAD
     console.log("didmount");
     console.log("token " + this.state.token);
     console.log("role " + this.state.role);
     console.log("usename " + this.state.usename);
 
     this.getAPI();
+=======
+    console.log("đimount");
+    console.log("token " + this.state.token);
+    console.log("role " + this.state.role);
+    // console.log("usename " + this.state.usename);
+
+    axios
+      .get("https://training-point.herokuapp.com/get_form")
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
   }
 
   signOut() {
@@ -177,8 +222,12 @@ class HomeSinhVien extends Component {
               <div className="sidebar-sticky">
                 <ul className="nav flex-column">
                   <li className="nav-item">
+<<<<<<< HEAD
                     <a className="nav-link">Sinh Viên</a>
                     
+=======
+                    <a className="nav-link">Thông báo</a>
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
                   </li>
                 </ul>
               </div>
@@ -188,7 +237,12 @@ class HomeSinhVien extends Component {
               role="main"
               className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"
             >
+<<<<<<< HEAD
               <h4>Mã số sinh viên: {this.state.usename}</h4><br/>
+=======
+              {/* <h2>Điểm rèn luyện</h2> */}
+
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
               <h5>Trạng thái đơn</h5>
               <br />
               <p>
@@ -225,8 +279,12 @@ class HomeSinhVien extends Component {
                           type="number"
                           className="form-control"
                           id="exampleFormControlInput1"
+<<<<<<< HEAD
                           value={this.state.point1Student}
                           onChange={this.handlePoint1}
+=======
+                          placeholder={this.state.point1Student}
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
                         />
                       </td>
                       <td>{this.state.point1Monitor}</td>
@@ -239,8 +297,12 @@ class HomeSinhVien extends Component {
                           type="number"
                           className="form-control"
                           id="exampleFormControlInput1"
+<<<<<<< HEAD
                           value={this.state.point2Student}
                           onChange={this.handlePoint2}
+=======
+                          placeholder={this.state.point2Student}
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
                         />
                       </td>
                       <td>{this.state.point2Monitor}</td>
@@ -253,14 +315,19 @@ class HomeSinhVien extends Component {
                           type="number"
                           className="form-control"
                           id="exampleFormControlInput1"
+<<<<<<< HEAD
                           value={this.state.point3Student}
                           onChange={this.handlePoint3}
+=======
+                          placeholder={this.state.point3Student}
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
                         />
                       </td>
                       <td>{this.state.point3Monitor}</td>
                     </tr>
                   </tbody>
                 </table>
+<<<<<<< HEAD
                 <p>Ghi chú: {this.state.message}</p>
                 <p>
                   Viết nhận xét{" "}
@@ -273,6 +340,8 @@ class HomeSinhVien extends Component {
                 </p>
 
                 <br />
+=======
+>>>>>>> 433afb3ab6baf504823cc8621496a5847dab540d
                 <button
                   type="button"
                   className="btn btn-success"
