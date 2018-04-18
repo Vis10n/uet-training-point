@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import ReactDOM from "react-dom";
+import Login from "../Login";
 // css
 import './css/bootstrap.css';
 import './css/dashboard.css'
@@ -11,7 +12,18 @@ class HomeCoVanHocTap extends Component {
             token : this.props.token,
             role : this.props.role
         };
-    
+        this.signOut = this.signOut.bind(this);
+      }
+      componentDidMount() {
+        //check da lam don chua tai day
+        
+      }
+
+      signOut() {
+        console.log(localStorage.getItem("role"));
+        localStorage.removeItem("role");
+        console.log(localStorage.getItem("role"));
+        ReactDOM.render(<Login />, document.getElementById("root"));
       }
     
       render() {
@@ -22,7 +34,7 @@ class HomeCoVanHocTap extends Component {
                 {/* <input className="form-control form-control-dark w-100" placeholder="Search" aria-label="Search" type="text"/> */}
                 <ul className="navbar-nav px-3">
                     <li className="nav-item text-nowrap">
-                    <a className="nav-link" href="">Sign out</a>
+                    <a className="nav-link" onClick={this.signOut}>Sign out</a>
                     </li>
                 </ul>
             </nav>

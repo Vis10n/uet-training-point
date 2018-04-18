@@ -27,11 +27,17 @@ class Login extends Component {
     });
   }
 
+  handleChangePassword(event) {
+    this.setState({
+      password: event.target.value
+    });
+  }
   componentDidMount() {
     console.log("didmount");
 
     console.log(localStorage.getItem("role"));
     var roleLocal = localStorage.getItem("role");
+
     if (roleLocal === "student") {
       ReactDOM.render(
         <HomeSinhVien role={roleLocal} />,
@@ -50,11 +56,7 @@ class Login extends Component {
     }
   }
 
-  handleChangePassword(event) {
-    this.setState({
-      password: event.target.value
-    });
-  }
+  
 
   handleSubmit(event) {
     axios
@@ -72,6 +74,7 @@ class Login extends Component {
             <HomeSinhVien
               token={response.data.token}
               role={response.data.role}
+
             />,
             document.getElementById("root")
           );

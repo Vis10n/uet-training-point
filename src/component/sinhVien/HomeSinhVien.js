@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./HomeSinhVien.css";
-
+import ReactDOM from "react-dom";
+import Login from "../Login";
 
 class HomeSinhVien extends Component {
   constructor(props) {
@@ -9,6 +10,19 @@ class HomeSinhVien extends Component {
       token: this.props.token,
       role: this.props.role
     };
+    this.signOut = this.signOut.bind(this);
+  }
+
+  componentDidMount() {
+    //check da lam don chua tai day
+    
+  }
+
+  signOut() {
+    console.log(localStorage.getItem("role"));
+    localStorage.removeItem("role");
+    console.log(localStorage.getItem("role"));
+    ReactDOM.render(<Login />, document.getElementById("root"));
   }
 
   render() {
@@ -18,6 +32,13 @@ class HomeSinhVien extends Component {
           <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
             Company name
           </a>
+          <ul className="navbar-nav px-3">
+            <li className="nav-item text-nowrap">
+              <a className="nav-link" onClick={this.signOut}>
+                Sign out
+              </a>
+            </li>
+          </ul>
         </nav>
 
         <div className="container-fluid">
@@ -25,16 +46,17 @@ class HomeSinhVien extends Component {
             <nav className="col-md-2 d-none d-md-block bg-light sidebar">
               <div className="sidebar-sticky">
                 <ul className="nav flex-column">
-                 
                   <li className="nav-item">
                     <a className="nav-link" href="#">
                       Products
                     </a>
-                  </li> <li className="nav-item">
+                  </li>{" "}
+                  <li className="nav-item">
                     <a className="nav-link" href="#">
                       Products
                     </a>
-                  </li> <li className="nav-item">
+                  </li>{" "}
+                  <li className="nav-item">
                     <a className="nav-link" href="#">
                       Products
                     </a>
@@ -43,7 +65,10 @@ class HomeSinhVien extends Component {
               </div>
             </nav>
 
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <main
+              role="main"
+              className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"
+            >
               <h2>Section title</h2>
               <div className="table-responsive">
                 <table className="table">
