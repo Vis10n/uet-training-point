@@ -40,13 +40,13 @@ class HomeCoVanHocTap extends Component {
       .then(response => {
         if (response.status === 200) {
           console.log("status 200");
-          console.log(response);
+          //console.log(response);
 
           this.setState({
             quantityForm: response.data.points.length,
             data: response.data.points
           });
-          console.log(this.state.data);
+          //console.log(this.state.data);
         }
         else {
           alert("Lỗi! Không thể tải dữ liệu");

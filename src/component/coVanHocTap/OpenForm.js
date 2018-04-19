@@ -48,6 +48,7 @@ class OpenForm extends Component {
             .then(response => {
                 if (response.data.status === "success") {
                     alert("Đã gửi cho văn phòng khoa");
+                    this.backToDashboard();
                 } else {
                     alert("Có lỗi xảy ra");
                 }
@@ -58,9 +59,16 @@ class OpenForm extends Component {
             });
     }
 
+    checkComment() {
+        if (this.state.messageNew === "" || this.state.messageNew === null) {
+            return false;
+        } else return true;
+    }
+
     //TODO Reject về cho lớp trưởng
     sendToMonitor() {
-        if (this.state.messageNew === "" || this.state.messageNew === null) {
+        //kiểm tra comment
+        if (!this.checkComment()) {
             alert("Lỗi! Chưa ghi lý do từ chối");
         }
         else {
@@ -78,6 +86,7 @@ class OpenForm extends Component {
                 .then(response => {
                     if (response.data.status === "success") {
                         alert("Đã gửi cho lớp trưởng");
+                        this.backToDashboard();
                     } else {
                         alert("Có lỗi xảy ra");
                     }
@@ -85,7 +94,7 @@ class OpenForm extends Component {
                 });
         }
     }
-
+    
     validateMess(mess) {
         return mess.trim();
     }
@@ -98,6 +107,16 @@ class OpenForm extends Component {
         //console.log(this.state.messageNew);
     }
 
+    backToDashboard() {
+        ReactDOM.render(
+            <HomeCoVanHocTap
+                token={this.state.token}
+                role={this.state.role}
+            />,
+          document.getElementById("root")
+        )
+    }
+
     signOut() {
         localStorage.removeItem("role");
         ReactDOM.render(
@@ -106,6 +125,7 @@ class OpenForm extends Component {
     }
 
     render() {
+        //render
         return (
             <div>
                 <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">

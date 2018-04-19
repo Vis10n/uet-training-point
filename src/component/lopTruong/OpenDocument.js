@@ -60,7 +60,7 @@ class HomeLopTruong extends Component {
           } else {
             alert("có lỗi xảy ra");
           }
-          console.log(response);
+          //console.log(response);
         })
         .catch(function(error) {
           console.log(error);
@@ -90,7 +90,7 @@ class HomeLopTruong extends Component {
           { headers: { token: this.state.token } }
         )
         .then(response => {
-          console.log(response);
+          //console.log(response);
           if (response.data.status === "success") {
             alert("Đã gửi cho sinh viên");
           } else {
@@ -120,9 +120,9 @@ class HomeLopTruong extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.data);
-    console.log(this.state.token);
-    console.log(this.state.pointID);
+    //console.log(this.state.data);
+    //console.log(this.state.token);
+    //console.log(this.state.pointID);
   }
 
   validatePoint(point) {
@@ -144,7 +144,7 @@ class HomeLopTruong extends Component {
     this.setState({
       messageNew: mess
     });
-    console.log(this.state.messageNew);
+    //console.log(this.state.messageNew);
   }
 
   handlePoint1Monitor(event) {
@@ -173,8 +173,8 @@ class HomeLopTruong extends Component {
   }
 
   render() {
-    console.log("ren");
-//render
+    //console.log("ren");
+  //render
     const XacNhanHayTuchoi = () => {
       if (this.checkSame) {
         return (
