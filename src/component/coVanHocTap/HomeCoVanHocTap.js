@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import Login from "../Login";
 import axios from "axios";
 
-// css
+//import css
 import "./css/bootstrap.css";
+import "./css/dashboard.css";
 import "./css/HomeCoVanHocTap.css";
+
+//import Components
+import Login from "../Login";
+import OpenForm from "./OpenForm";
 
 class HomeCoVanHocTap extends Component {
   constructor(props) {
@@ -16,17 +20,19 @@ class HomeCoVanHocTap extends Component {
 
       data: [],
       quantityForm: 0
-    };
+    }
     this.getFormList = this.getFormList.bind(this);
+    this.showForm = this.showForm.bind(this);
     this.signOut = this.signOut.bind(this);
   }
   componentDidMount() {
-    //show ds form da gui len
+    //TODO hiển thị DS form đã gửi lên
     console.log("get form list");
     this.getFormList();
   }
-  
-  getFormList () {
+
+  //TODO lấy ds form ĐRL qua API
+  getFormList() {
     axios
       .get("https://training-point.herokuapp.com/points", {
         headers: { token: this.state.token }
@@ -43,21 +49,31 @@ class HomeCoVanHocTap extends Component {
           console.log(this.state.data);
         }
         else {
-          alert("Error! Failed to load data");
+          alert("Lỗi! Không thể tải dữ liệu");
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
 
+  //TODO render form ĐRL chi tiết
+  showForm(data) {
+    ReactDOM.render(
+      <OpenForm
+        token={this.state.token}
+        role={this.state.role}
+        data={data}
+      />
+      , document.getElementById("root"));
+  }
+
+  //TODO Dang xuat
   signOut() {
-    // console.log(localStorage.getItem("role"));
     localStorage.removeItem("role");
-    // console.log(localStorage.getItem("role"));
     ReactDOM.render(
       <Login />,
-       document.getElementById("root")
+      document.getElementById("root")
     );
   }
 
@@ -66,9 +82,10 @@ class HomeCoVanHocTap extends Component {
 
     return (
       <div>
+        {/* navigation bar */}
         <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
           <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
-            Teacher
+            Teacher's Home
           </a>
           {/* <input className="form-control form-control-dark w-100" placeholder="Search" aria-label="Search" type="text"/> */}
           <ul className="navbar-nav px-3">
@@ -90,58 +107,44 @@ class HomeCoVanHocTap extends Component {
                       Dashboard <span className="sr-only">(current)</span>
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="">
-                      Reports
-                    </a>
-                  </li>
-                </ul>
-
-                <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                  <span>Saved reports</span>
-                  <a className="d-flex align-items-center text-muted" href="">
-                  </a>
-                </h6>
-                <ul className="nav flex-column mb-2">
-                  <li className="nav-item">
-                    <a className="nav-link" href="">
-                      Current month
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="">
-                      Last quarter
-                    </a>
-                  </li>
                 </ul>
               </div>
             </nav>
 
+            {/* Main */}
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 className="h2">Danh sách đơn</h1>
               </div>
               <div id="main-teacher">
                 <div className="table-responsive">
-                  <table className="table table-stripped table-hover">
+                  <table id="example" className="table table-hover table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Họ tên</th>
-                        <th scope="col">Ghi chú</th>
+                        <th>ID </th>
+                        <th>Tên </th>
+                        <th>Ghi chú</th>
                       </tr>
                     </thead>
                     <tbody>
                       {this.state.data.map(item => (
-                        <tr key={item.id} onClick={() => this.openDocument(item)}>
+                        <tr key={item.id} onClick={() => this.showForm(item)}>
                           <td>{item.id}</td>
                           <td>{item.user_name}</td>
                           <td>{item.message}</td>
                         </tr>
                       ))}
                     </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>ID </th>
+                        <th>Tên </th>
+                        <th>Ghi chú</th>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
+                <div className="col-sm-2"></div>
               </div>
             </main>
           </div>
