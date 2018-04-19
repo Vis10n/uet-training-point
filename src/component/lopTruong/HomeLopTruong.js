@@ -106,7 +106,6 @@ class HomeLopTruong extends Component {
                       <th scope="col">ID của đơn</th>
                       <th scope="col">Họ tên</th>
                       <th scope="col">Ghi chú</th>
-                      <th scope="col" />
                     </tr>
                   </thead>
                   <tbody>
