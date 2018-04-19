@@ -36,9 +36,8 @@ class Login extends Component {
     console.log("didmount Login");
     //console.log(localStorage.getItem("role"));
     let b = localStorage.getItem("role");
-    //console.log("b = " + b);
-
-    if (b != null) {
+    
+    if (b !== null) {
       let a = JSON.parse(localStorage.getItem("role"));
       let role = a[0];
       let token = a[1];
@@ -59,6 +58,10 @@ class Login extends Component {
           document.getElementById("root")
         );
       }
+    }
+    else{
+      console.log("null");
+      
     }
   }
 

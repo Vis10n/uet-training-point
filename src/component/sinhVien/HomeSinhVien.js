@@ -55,6 +55,7 @@ class HomeSinhVien extends Component {
       messageNew: mess
     });
   }
+  
   handlePoint1(event) {
     let point = this.validatePoint(event.target.value);
     this.setState({
@@ -104,43 +105,65 @@ class HomeSinhVien extends Component {
           teacher_verify: data.monitor_verify,
           student_name: data.user_name
         });
+        console.log("get done");
       })
       .catch(function(error) {
         console.log(error);
       });
-    console.log("get done");
+    
   }
+
+  validateSendInfo(point1, point2, point3) {
+    if (point1 > 0 && point1 <= 100) {
+      if (point2 > 0 && point2 <= 100) {
+        if (point3 > 0 && point3 <= 100) {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
+  }
+
   sendInfo() {
     console.log("post");
-
-    axios
-      .post(
-        "https://training-point.herokuapp.com/submit",
-        {
-          point_id: this.state.pointId,
-          point1: this.state.point1Student,
-          point2: this.state.point2Student,
-          point3: this.state.point3Student,
-          message: this.state.messageNew
-        },
-        { headers: { token: this.state.token } }
-      )
-      .then(response => {
-        console.log(response.status);
-        if (response.status === 200) {
-          alert("Đã gửi thành công.");
-          this.getAPI();
-        } else {
-          alert("Lỗi");
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    let condition = this.validateSendInfo(
+      this.state.point1Student,
+      this.state.point2Student,
+      this.state.point3Student
+    );
+    if (condition) {
+      axios
+        .post(
+          "https://training-point.herokuapp.com/submit",
+          {
+            point_id: this.state.pointId,
+            point1: this.state.point1Student,
+            point2: this.state.point2Student,
+            point3: this.state.point3Student,
+            message: this.state.messageNew
+          },
+          { headers: { token: this.state.token } }
+        )
+        .then(response => {
+          console.log(response.status);
+          if (response.status === 200) {
+            alert("Đã gửi thành công.");
+            this.getAPI();
+          } else {
+            alert("Mời bạn điền lại");
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    } else {
+      alert("Mời bạn điền lại");
+    }
   }
 
   componentDidMount() {
-    //check da lam don chua tai day
+    //check da lam don 
     console.log("didmount");
     console.log("token " + this.state.token);
     console.log("role " + this.state.role);
@@ -195,6 +218,7 @@ class HomeSinhVien extends Component {
 
     const inputComment = this.state.student_verify ? null : (
       <div>
+        <p>Ghi chú: {this.state.message}</p>
         <p>Viết nhận xét</p>
         <input
           type="text"
