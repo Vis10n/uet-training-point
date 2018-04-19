@@ -163,7 +163,7 @@ class HomeSinhVien extends Component {
   }
 
   componentDidMount() {
-    //check da lam don chua tai day
+    //check da lam don 
     console.log("didmount");
     console.log("token " + this.state.token);
     console.log("role " + this.state.role);

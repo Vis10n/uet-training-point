@@ -174,7 +174,7 @@ class HomeLopTruong extends Component {
 
   render() {
     console.log("ren");
-
+//render
     const XacNhanHayTuchoi = () => {
       if (this.checkSame) {
         return (
