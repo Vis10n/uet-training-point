@@ -76,7 +76,7 @@ class HomeLopTruong extends Component {
     } else {
       axios
         .post(
-          "https://training-point.herokuapp.com/verify",
+          "https://training-point.herokuapp.com/reject",
           {
             point_id: this.state.pointID,
             // point1: this.state.point1,
@@ -193,7 +193,7 @@ class HomeLopTruong extends Component {
       <div>
         <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
           <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
-            UET training point
+            Monitor's Home
           </a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap">
@@ -220,7 +220,7 @@ class HomeLopTruong extends Component {
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Đơn cần phê duyệt</h1>
+                <h1 class="h2">Phiếu điểm cần phê duyệt</h1>
               </div>
               <h5>Họ và tên: {this.state.data.user_name}</h5>
               <h6>Ghi chú từ sinh viên: {this.state.messageFromStudent}</h6>
@@ -229,7 +229,7 @@ class HomeLopTruong extends Component {
                   <thead>
                     <tr>
                       <th scope="col">STT</th>
-                      <th scope="col">Danh sách điểm rèn luyện</th>
+                      <th scope="col">Thành phần điểm</th>
                       <th scope="col">Sinh viên điền</th>
                       <th scope="col">Lớp trưởng điền</th>
                     </tr>

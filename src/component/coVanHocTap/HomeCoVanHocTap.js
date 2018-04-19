@@ -114,7 +114,7 @@ class HomeCoVanHocTap extends Component {
             {/* Main */}
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 className="h2">Danh sách đơn</h1>
+                <h1 className="h2">Danh sách phiếu ĐRL sinh viên</h1>
               </div>
               <div id="main-teacher">
                 <div className="table-responsive">

@@ -33,7 +33,7 @@ class Login extends Component {
     });
   }
   componentDidMount() {
-    console.log("didmount Login");
+    //console.log("didmount Login");
     //console.log(localStorage.getItem("role"));
     let b = localStorage.getItem("role");
     
@@ -120,8 +120,7 @@ class Login extends Component {
   }
 
   render() {
-    console.log("render");
-
+    //console.log("render");
     return (
       <div className="main-login">
         <form className="form-signin">

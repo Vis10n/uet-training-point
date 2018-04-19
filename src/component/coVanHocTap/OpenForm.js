@@ -32,16 +32,7 @@ class OpenForm extends Component {
         this.sendToMonitor = this.sendToMonitor.bind(this);
         this.handleMessage = this.handleMessage.bind(this);
     }
-    
-    backToDashboard() {
-        ReactDOM.render(
-            <HomeCoVanHocTap
-              token={this.props.token}
-              role={this.props.role}
-            />,
-            document.getElementById("root")
-          );
-    }
+
     //TODO verify và gửi
     sendToFaculty() {
         axios
@@ -56,16 +47,15 @@ class OpenForm extends Component {
             )
             .then(response => {
                 if (response.data.status === "success") {
-                  alert("Đã gửi cho văn phòng khoa");
+                    alert("Đã gửi cho văn phòng khoa");
                 } else {
-                  alert("Có lỗi xảy ra");
+                    alert("Có lỗi xảy ra");
                 }
                 //console.log(response);
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
-        this.backToDashboard();
     }
 
     //TODO Reject về cho lớp trưởng
@@ -81,25 +71,29 @@ class OpenForm extends Component {
                         point_id: this.state.pointID,
                         message: this.state.messageNew
                     },
-                    { 
-                        headers: { token: this.state.token } 
+                    {
+                        headers: { token: this.state.token }
                     }
                 )
                 .then(response => {
-                    console.log(response);
+                    if (response.data.status === "success") {
+                        alert("Đã gửi cho lớp trưởng");
+                    } else {
+                        alert("Có lỗi xảy ra");
+                    }
+                    //console.log(response);
                 });
-            this.backToDashboard();
         }
     }
 
     validateMess(mess) {
         return mess.trim();
     }
-    
-      handleMessage(event) {
+
+    handleMessage(event) {
         let mess = this.validateMess(event.target.value);
         this.setState({
-          messageNew: mess
+            messageNew: mess
         });
         //console.log(this.state.messageNew);
     }
@@ -134,7 +128,7 @@ class OpenForm extends Component {
                                 <ul className="nav flex-column">
                                     <li className="nav-item">
                                         <a className="nav-link active" href="">
-                                            Về dashboard
+                                            Quay về
                                         </a>
                                     </li>
                                 </ul>
@@ -143,7 +137,7 @@ class OpenForm extends Component {
 
                         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                                <h1 class="h2">Đơn cần phê duyệt</h1>
+                                <h1 class="h2">Phiếu điểm cần phê duyệt</h1>
                             </div>
                             <h5>Họ và tên: {this.state.data.user_name}</h5>
                             <h6>Ghi chú từ sinh viên: {this.state.messageFromStudent}</h6>
@@ -152,7 +146,7 @@ class OpenForm extends Component {
                                     <thead>
                                         <tr>
                                             <th scope="col">STT</th>
-                                            <th scope="col">Danh sách điểm rèn luyện</th>
+                                            <th scope="col">Thành phần điểm</th>
                                             <th scope="col">Sinh viên điền</th>
                                             <th scope="col">Lớp trưởng điền</th>
                                         </tr>
