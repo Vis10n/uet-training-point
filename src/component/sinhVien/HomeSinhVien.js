@@ -241,7 +241,7 @@ class HomeSinhVien extends Component {
       <div>
         <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
           <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
-            UET training point
+            Student's Home
           </a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap">
@@ -272,7 +272,7 @@ class HomeSinhVien extends Component {
                 Họ tên : {this.state.student_name} - {this.state.username}
               </h4>
               <br />
-              <h5>Trạng thái đơn</h5>
+              <h5>Trạng thái phiếu điểm</h5>
               <br />
 
               <p>
@@ -301,7 +301,7 @@ class HomeSinhVien extends Component {
                   <thead>
                     <tr>
                       <th scope="col">STT</th>
-                      <th scope="col">Danh sách điểm rèn luyện</th>
+                      <th scope="col">Thành phần điểm</th>
                       <th scope="col">Sinh viên điền</th>
                       <th scope="col">Lớp trưởng điền</th>
                     </tr>

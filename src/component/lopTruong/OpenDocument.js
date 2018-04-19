@@ -104,9 +104,9 @@ class HomeLopTruong extends Component {
   }
 
   checkSame() {
-    if (this.state.data.point1 == this.state.point1Monitor) {
-      if (this.state.data.point2 == this.state.point2Monitor) {
-        if (this.state.data.point3 == this.state.point3Monitor) {
+    if (this.state.data.point1 === this.state.point1Monitor) {
+      if (this.state.data.point2 === this.state.point2Monitor) {
+        if (this.state.data.point3 === this.state.point3Monitor) {
           return true;
         } else {
           return false;
@@ -175,19 +175,20 @@ class HomeLopTruong extends Component {
   render() {
     //console.log("ren");
   //render
-    const XacNhanHayTuchoi = () => {
-      if (this.checkSame) {
-        return (
-          <button type="button" class="btn btn-success">
-            Xác nhận
-          </button>
-        );
-      } else {
-        <button type="button" class="btn btn-danger">
-          Từ chối
-        </button>;
-      }
-    };
+  
+    // const XacNhanHayTuchoi = () => {
+    //   if (this.checkSame) {
+    //     return (
+    //       <button type="button" class="btn btn-success">
+    //         Xác nhận
+    //       </button>
+    //     );
+    //   } else {
+    //     <button type="button" class="btn btn-danger">
+    //       Từ chối
+    //     </button>;
+    //   }
+    // };
 
     return (
       <div>
