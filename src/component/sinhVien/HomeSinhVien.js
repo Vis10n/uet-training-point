@@ -10,7 +10,7 @@ class HomeSinhVien extends Component {
     this.state = {
       token: this.props.token,
       role: this.props.role,
-      usename: this.props.username,
+      username: this.props.username,
 
       pointId: null,
       point1Student: 0,
@@ -24,8 +24,7 @@ class HomeSinhVien extends Component {
 
       student_verify: false,
       monitor_verify: false,
-      teacher_verify: false,
-
+      teacher_verify: false
     };
     this.signOut = this.signOut.bind(this);
     this.sendInfo = this.sendInfo.bind(this);
@@ -36,41 +35,41 @@ class HomeSinhVien extends Component {
     this.handleMessage = this.handleMessage.bind(this);
   }
 
-  validatePoint(point){
-    if (point<0) {
-      return 0
-    } else if (point > 100){
-      return 100
+  validatePoint(point) {
+    if (point < 0) {
+      return 0;
+    } else if (point > 100) {
+      return 100;
     } else {
-      return point
+      return point;
     }
   }
 
-  validateMess(mess){
+  validateMess(mess) {
     return mess.trim();
   }
 
   handleMessage(event) {
-    let mess = this.validateMess(event.target.value)
+    let mess = this.validateMess(event.target.value);
     this.setState({
       messageNew: mess
     });
   }
   handlePoint1(event) {
-    let point = this.validatePoint(event.target.value)
+    let point = this.validatePoint(event.target.value);
     this.setState({
       point1Student: point
     });
     console.log("point 1" + this.state.point1Student);
   }
   handlePoint2(event) {
-    let point = this.validatePoint(event.target.value)
+    let point = this.validatePoint(event.target.value);
     this.setState({
       point2Student: point
     });
   }
   handlePoint3(event) {
-    let point = this.validatePoint(event.target.value)
+    let point = this.validatePoint(event.target.value);
     this.setState({
       point3Student: point
     });
@@ -102,12 +101,14 @@ class HomeSinhVien extends Component {
           message: data.message,
           student_verify: data.student_verify,
           monitor_verify: data.monitor_verify,
-          teacher_verify: data.monitor_verify
+          teacher_verify: data.monitor_verify,
+          student_name: data.user_name
         });
       })
       .catch(function(error) {
         console.log(error);
       });
+    console.log("get done");
   }
   sendInfo() {
     console.log("post");
@@ -143,7 +144,7 @@ class HomeSinhVien extends Component {
     console.log("didmount");
     console.log("token " + this.state.token);
     console.log("role " + this.state.role);
-    console.log("usename " + this.state.usename);
+    console.log("username " + this.state.username);
 
     this.getAPI();
   }
@@ -156,6 +157,62 @@ class HomeSinhVien extends Component {
   }
 
   render() {
+    const inputPoin1 = this.state.student_verify ? (
+      this.state.point1Student
+    ) : (
+      <input
+        type="number"
+        className="form-control"
+        id="exampleFormControlInput1"
+        value={this.state.point1Student}
+        onChange={this.handlePoint1}
+      />
+    );
+
+    const inputPoin2 = this.state.student_verify ? (
+      this.state.point2Student
+    ) : (
+      <input
+        type="number"
+        className="form-control"
+        id="exampleFormControlInput1"
+        value={this.state.point2Student}
+        onChange={this.handlePoint2}
+      />
+    );
+
+    const inputPoin3 = this.state.student_verify ? (
+      this.state.point3Student
+    ) : (
+      <input
+        type="number"
+        className="form-control"
+        id="exampleFormControlInput1"
+        value={this.state.point3Student}
+        onChange={this.handlePoint3}
+      />
+    );
+
+    const inputComment = this.state.student_verify ? null : (
+      <div>
+        <p>Viết nhận xét</p>
+        <input
+          type="text"
+          className="form-control"
+          id="exampleFormControlInput1"
+          onChange={this.handleMessage}
+        />
+        <br />
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={this.sendInfo}
+        >
+          Gửi cho lớp trưởng
+        </button>
+      </div>
+    );
+
     return (
       <div>
         <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
@@ -178,7 +235,6 @@ class HomeSinhVien extends Component {
                 <ul className="nav flex-column">
                   <li className="nav-item">
                     <a className="nav-link">Sinh Viên</a>
-                    
                   </li>
                 </ul>
               </div>
@@ -188,9 +244,18 @@ class HomeSinhVien extends Component {
               role="main"
               className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"
             >
-              <h4>Mã số sinh viên: {this.state.usename}</h4><br/>
+              <h4>
+                Họ tên : {this.state.student_name} - {this.state.username}
+              </h4>
+              <br />
               <h5>Trạng thái đơn</h5>
               <br />
+
+              <p>
+                {" "}
+                Sinh viên:{" "}
+                {this.state.student_verify ? "đã gửi đơn" : "chưa gửi đơn"}{" "}
+              </p>
               <p>
                 {" "}
                 Lớp trưởng:{" "}
@@ -205,9 +270,10 @@ class HomeSinhVien extends Component {
                   ? "đã xác nhận"
                   : "chưa xác nhận"}{" "}
               </p>
+              <p>Ghi chú: {this.state.message}</p>
               <br />
               <div className="table-responsive">
-                <table className="table">
+                <table className="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">STT</th>
@@ -220,66 +286,30 @@ class HomeSinhVien extends Component {
                     <tr>
                       <th scope="row">1</th>
                       <td>Điểm học tập</td>
-                      <td>
-                        <input
-                          type="number"
-                          className="form-control"
-                          id="exampleFormControlInput1"
-                          value={this.state.point1Student}
-                          onChange={this.handlePoint1}
-                        />
-                      </td>
+                      <td>{inputPoin1}</td>
                       <td>{this.state.point1Monitor}</td>
                     </tr>
                     <tr>
                       <th scope="row">2</th>
                       <td>Điểm rèn luyện</td>
-                      <td>
-                        <input
-                          type="number"
-                          className="form-control"
-                          id="exampleFormControlInput1"
-                          value={this.state.point2Student}
-                          onChange={this.handlePoint2}
-                        />
-                      </td>
+                      <td>{inputPoin2}</td>
                       <td>{this.state.point2Monitor}</td>
                     </tr>
                     <tr>
                       <th scope="row">3</th>
                       <td>Điểm ngoại khóa</td>
-                      <td>
-                        <input
-                          type="number"
-                          className="form-control"
-                          id="exampleFormControlInput1"
-                          value={this.state.point3Student}
-                          onChange={this.handlePoint3}
-                        />
-                      </td>
+                      <td>{inputPoin3}</td>
                       <td>{this.state.point3Monitor}</td>
                     </tr>
                   </tbody>
                 </table>
-                <p>Ghi chú: {this.state.message}</p>
-                <p>
-                  Viết nhận xét{" "}
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="exampleFormControlInput1"
-                    onChange={this.handleMessage}
-                  />
-                </p>
-
-                <br />
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  onClick={this.sendInfo}
-                >
-                  Gửi cho lớp trưởng
-                </button>
+                <div className="container">
+                  <div className="row">
+                    <div className="col-sm-2" />
+                    <div className="col-sm-8">{inputComment}</div>
+                    <div className="col-sm-2" />
+                  </div>
+                </div>
               </div>
             </main>
           </div>
