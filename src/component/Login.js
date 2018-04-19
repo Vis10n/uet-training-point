@@ -33,10 +33,10 @@ class Login extends Component {
     });
   }
   componentDidMount() {
-    console.log("didmount");
-    console.log(localStorage.getItem("role"));
+    console.log("didmount Login");
+    //console.log(localStorage.getItem("role"));
     let b = localStorage.getItem("role");
-    console.log("b = " + b);
+    //console.log("b = " + b);
 
     if (b != null) {
       let a = JSON.parse(localStorage.getItem("role"));
