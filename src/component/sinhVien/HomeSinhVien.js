@@ -55,6 +55,7 @@ class HomeSinhVien extends Component {
       messageNew: mess
     });
   }
+  
   handlePoint1(event) {
     let point = this.validatePoint(event.target.value);
     this.setState({
