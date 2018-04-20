@@ -88,6 +88,8 @@ class HomeSinhVien extends Component {
         headers: { token: this.state.token }
       })
       .then(response => {
+        console.log(response);
+        
         let data = response.data.point;
         //console.log(data);
 
@@ -102,7 +104,7 @@ class HomeSinhVien extends Component {
           message: data.message,
           student_verify: data.student_verify,
           monitor_verify: data.monitor_verify,
-          teacher_verify: data.monitor_verify,
+          teacher_verify: data.teacher_verify,
           student_name: data.user_name
         });
         //console.log("get done");

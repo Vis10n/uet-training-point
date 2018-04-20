@@ -107,7 +107,7 @@ class HomeLopTruong extends Component {
                 
                 <p>Có tổng cộng: {this.state.numberOfDocument} đơn</p> <br />
                 <br />
-                <table className="table table-striped">
+                <table className="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">ID của đơn</th>

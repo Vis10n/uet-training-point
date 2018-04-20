@@ -36,7 +36,7 @@ class Login extends Component {
     //console.log("didmount Login");
     //console.log(localStorage.getItem("role"));
     let b = localStorage.getItem("role");
-    
+
     if (b !== null) {
       let a = JSON.parse(localStorage.getItem("role"));
       let role = a[0];
@@ -58,10 +58,8 @@ class Login extends Component {
           document.getElementById("root")
         );
       }
-    }
-    else{
+    } else {
       console.log("null");
-      
     }
   }
 
@@ -73,44 +71,52 @@ class Login extends Component {
       })
       .then(response => {
         console.log(response);
-        // var usernameProp = this.state.username;
-        // console.log(usernameProp);
-        console.log(this.state.username);
 
-        var dataSave = [
-          response.data.role,
-          response.data.token,
-          this.state.username
-        ];
-        console.log(dataSave[2]);
+        if (response.data.status == "fail") {
+          console.log("not ok");
+          alert("Xin mời nhập lại.")
+        } else {
+          console.log("ok");
+          console.log(response);
+          // var usernameProp = this.state.username;
+          // console.log(usernameProp);
+          console.log(this.state.username);
 
-        localStorage.setItem("role", JSON.stringify(dataSave));
+          var dataSave = [
+            response.data.role,
+            response.data.token,
+            this.state.username
+          ];
+          console.log(dataSave[2]);
 
-        if (response.data.role === "student") {
-          ReactDOM.render(
-            <HomeSinhVien
-              token={response.data.token}
-              role={response.data.role}
-              username={this.state.username}
-            />,
-            document.getElementById("root")
-          );
-        } else if (response.data.role === "monitor") {
-          ReactDOM.render(
-            <HomeLopTruong
-              token={response.data.token}
-              role={response.data.role}
-            />,
-            document.getElementById("root")
-          );
-        } else if (response.data.role === "teacher") {
-          ReactDOM.render(
-            <HomeCoVanHocTap
-              token={response.data.token}
-              role={response.data.role}
-            />,
-            document.getElementById("root")
-          );
+          localStorage.setItem("role", JSON.stringify(dataSave));
+
+          if (response.data.role === "student") {
+            ReactDOM.render(
+              <HomeSinhVien
+                token={response.data.token}
+                role={response.data.role}
+                username={this.state.username}
+              />,
+              document.getElementById("root")
+            );
+          } else if (response.data.role === "monitor") {
+            ReactDOM.render(
+              <HomeLopTruong
+                token={response.data.token}
+                role={response.data.role}
+              />,
+              document.getElementById("root")
+            );
+          } else if (response.data.role === "teacher") {
+            ReactDOM.render(
+              <HomeCoVanHocTap
+                token={response.data.token}
+                role={response.data.role}
+              />,
+              document.getElementById("root")
+            );
+          }
         }
       })
       .catch(function(error) {
@@ -127,7 +133,7 @@ class Login extends Component {
           <div className="text-center mb-4">
             <img
               className="mb-4"
-              src="https://ih1.redbubble.net/image.481229463.9121/flat,800x800,070,f.u1.jpg"
+              src="https://vnu.edu.vn/upload/2012/04/12715/image/VNU-UET.jpg"
               alt=""
               width="72"
               height="72"
