@@ -21,11 +21,14 @@ class HomeLopTruong extends Component {
   }
 
   openDocument(data) {
-    ReactDOM.render(<OpenDocument 
-      token = {this.state.token}
-      role = {this.state.role}
-      data = {data}
-    />, document.getElementById("root"));
+    ReactDOM.render(
+      <OpenDocument
+        token={this.state.token}
+        role={this.state.role}
+        data={data}
+      />,
+      document.getElementById("root")
+    );
   }
 
   getApi() {
@@ -97,16 +100,19 @@ class HomeLopTruong extends Component {
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Danh sách các đơn</h1>
+                <h1 class="h2">Danh sách các đơn đang chờ phê duyệt</h1>
               </div>
               <div id="main-monitor">
-                <table className="table table-hover">
+                
+                <p>Có tổng cộng: {this.state.numberOfDocument} đơn</p> <br />
+                <br />
+                <table className="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">ID của đơn</th>
                       <th scope="col">Họ tên</th>
                       <th scope="col">Ghi chú</th>
-                      <th scope="col" />
+                      <th scope="col">Ngày gửi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -115,6 +121,7 @@ class HomeLopTruong extends Component {
                         <td>{item.id}</td>
                         <td>{item.user_name}</td>
                         <td>{item.message}</td>
+                        <td>{item.updated_at.slice(0, 10)}</td>
                       </tr>
                     ))}
                   </tbody>

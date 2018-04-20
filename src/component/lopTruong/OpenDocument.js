@@ -56,7 +56,12 @@ class HomeLopTruong extends Component {
         )
         .then(response => {
           if (response.data.status === "success") {
-            alert("Đã gửi cho cố vẫn học tập");
+            console.log("success");
+
+            ReactDOM.render(
+              <HomeLopTruong role={this.state.role} token={this.state.token} />,
+              document.getElementById("root")
+            );
           } else {
             alert("có lỗi xảy ra");
           }
@@ -76,7 +81,7 @@ class HomeLopTruong extends Component {
     } else {
       axios
         .post(
-          "https://training-point.herokuapp.com/verify",
+          "https://training-point.herokuapp.com/reject",
           {
             point_id: this.state.pointID,
             // point1: this.state.point1,
@@ -92,7 +97,11 @@ class HomeLopTruong extends Component {
         .then(response => {
           console.log(response);
           if (response.data.status === "success") {
-            alert("Đã gửi cho sinh viên");
+            console.log("Đã gửi cho sinh viên");
+            ReactDOM.render(
+              <HomeLopTruong role={this.state.role} token={this.state.token} />,
+              document.getElementById("root")
+            );
           } else {
             alert("có lỗi xảy ra");
           }
@@ -103,10 +112,10 @@ class HomeLopTruong extends Component {
     }
   }
 
-  checkSame() {
-    if (this.state.data.point1 == this.state.point1Monitor) {
-      if (this.state.data.point2 == this.state.point2Monitor) {
-        if (this.state.data.point3 == this.state.point3Monitor) {
+  checkSame() {// eslint-disable-next-line
+    if (this.state.data.point1 == this.state.point1Monitor) {// eslint-disable-next-line
+      if (this.state.data.point2 == this.state.point2Monitor) {// eslint-disable-next-line
+        if (this.state.data.point3 == this.state.point3Monitor) {// eslint-disable-next-line
           return true;
         } else {
           return false;
@@ -174,20 +183,20 @@ class HomeLopTruong extends Component {
 
   render() {
     console.log("ren");
-//render
-    const XacNhanHayTuchoi = () => {
-      if (this.checkSame) {
-        return (
-          <button type="button" class="btn btn-success">
-            Xác nhận
-          </button>
-        );
-      } else {
-        <button type="button" class="btn btn-danger">
-          Từ chối
-        </button>;
-      }
-    };
+    //render
+    // const XacNhanHayTuchoi = () => {
+    //   if (this.checkSame) {
+    //     return (
+    //       <button type="button" class="btn btn-success">
+    //         Xác nhận
+    //       </button>
+    //     );
+    //   } else {
+    //     <button type="button" class="btn btn-danger">
+    //       Từ chối
+    //     </button>;
+    //   }
+    // };
 
     return (
       <div>
