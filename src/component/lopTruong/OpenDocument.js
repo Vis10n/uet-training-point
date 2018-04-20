@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import HomeLopTruong from './HomeLopTruong';
+import HomeLopTruong from "./HomeLopTruong";
 //css
 import "./css/bootstrap.css";
 import "./css/dashboard.css";
@@ -85,11 +85,11 @@ class OpenDocument extends Component {
           {
             point_id: this.state.pointID,
             // point1: this.state.point1,
-            // point1_monitor: this.state.point1Monitor,
+            point1_monitor: this.state.point1Monitor,
             // point2: this.state.point2,
-            // point2_monitor: this.state.point2Monitor,
+            point2_monitor: this.state.point2Monitor,
             // point3: this.state.point3,
-            // point3_monitor: this.state.point3Monitor,
+            point3_monitor: this.state.point3Monitor,
             message: this.state.messageNew
           },
           { headers: { token: this.state.token } }
@@ -112,10 +112,14 @@ class OpenDocument extends Component {
     }
   }
 
-  checkSame() {// eslint-disable-next-line
-    if (this.state.data.point1 == this.state.point1Monitor) {// eslint-disable-next-line
-      if (this.state.data.point2 == this.state.point2Monitor) {// eslint-disable-next-line
-        if (this.state.data.point3 == this.state.point3Monitor) {// eslint-disable-next-line
+  checkSame() {
+    // eslint-disable-next-line
+    if (this.state.data.point1 == this.state.point1Monitor) {
+      // eslint-disable-next-line
+      if (this.state.data.point2 == this.state.point2Monitor) {
+        // eslint-disable-next-line
+        if (this.state.data.point3 == this.state.point3Monitor) {
+          // eslint-disable-next-line
           return true;
         } else {
           return false;
