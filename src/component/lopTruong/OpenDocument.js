@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-
+import HomeLopTruong from './HomeLopTruong';
 //css
 import "./css/bootstrap.css";
 import "./css/dashboard.css";
 
 //JS Components
 import Login from "../Login";
-class HomeLopTruong extends Component {
+class OpenDocument extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,7 +65,7 @@ class HomeLopTruong extends Component {
           } else {
             alert("có lỗi xảy ra");
           }
-          console.log(response);
+          //console.log(response);
         })
         .catch(function(error) {
           console.log(error);
@@ -95,9 +95,9 @@ class HomeLopTruong extends Component {
           { headers: { token: this.state.token } }
         )
         .then(response => {
-          console.log(response);
+          //console.log(response);
           if (response.data.status === "success") {
-            console.log("Đã gửi cho sinh viên");
+            alert("Đã gửi cho sinh viên");
             ReactDOM.render(
               <HomeLopTruong role={this.state.role} token={this.state.token} />,
               document.getElementById("root")
@@ -129,9 +129,9 @@ class HomeLopTruong extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.data);
-    console.log(this.state.token);
-    console.log(this.state.pointID);
+    //console.log(this.state.data);
+    //console.log(this.state.token);
+    //console.log(this.state.pointID);
   }
 
   validatePoint(point) {
@@ -153,7 +153,7 @@ class HomeLopTruong extends Component {
     this.setState({
       messageNew: mess
     });
-    console.log(this.state.messageNew);
+    //console.log(this.state.messageNew);
   }
 
   handlePoint1Monitor(event) {
@@ -183,26 +183,12 @@ class HomeLopTruong extends Component {
 
   render() {
     console.log("ren");
-    //render
-    // const XacNhanHayTuchoi = () => {
-    //   if (this.checkSame) {
-    //     return (
-    //       <button type="button" class="btn btn-success">
-    //         Xác nhận
-    //       </button>
-    //     );
-    //   } else {
-    //     <button type="button" class="btn btn-danger">
-    //       Từ chối
-    //     </button>;
-    //   }
-    // };
 
     return (
       <div>
         <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
           <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
-            UET training point
+            Monitor's Home
           </a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap">
@@ -229,7 +215,7 @@ class HomeLopTruong extends Component {
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Đơn cần phê duyệt</h1>
+                <h1 class="h2">Phiếu điểm cần phê duyệt</h1>
               </div>
               <h5>Họ và tên: {this.state.data.user_name}</h5>
               <h6>Ghi chú từ sinh viên: {this.state.messageFromStudent}</h6>
@@ -238,7 +224,7 @@ class HomeLopTruong extends Component {
                   <thead>
                     <tr>
                       <th scope="col">STT</th>
-                      <th scope="col">Danh sách điểm rèn luyện</th>
+                      <th scope="col">Thành phần điểm</th>
                       <th scope="col">Sinh viên điền</th>
                       <th scope="col">Lớp trưởng điền</th>
                     </tr>
@@ -336,4 +322,4 @@ class HomeLopTruong extends Component {
     );
   }
 }
-export default HomeLopTruong;
+export default OpenDocument;

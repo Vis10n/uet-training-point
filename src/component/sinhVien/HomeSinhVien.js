@@ -61,7 +61,7 @@ class HomeSinhVien extends Component {
     this.setState({
       point1Student: point
     });
-    console.log("point 1" + this.state.point1Student);
+    //console.log("point 1" + this.state.point1Student);
   }
   handlePoint2(event) {
     let point = this.validatePoint(event.target.value);
@@ -77,7 +77,7 @@ class HomeSinhVien extends Component {
   }
 
   ShowInfo = data => {
-    console.log(data);
+    //console.log(data);
   };
 
   getAPI() {
@@ -89,7 +89,7 @@ class HomeSinhVien extends Component {
       })
       .then(response => {
         let data = response.data.point;
-        console.log(data);
+        //console.log(data);
 
         this.setState({
           pointId: data.id,
@@ -105,7 +105,7 @@ class HomeSinhVien extends Component {
           teacher_verify: data.monitor_verify,
           student_name: data.user_name
         });
-        console.log("get done");
+        //console.log("get done");
       })
       .catch(function(error) {
         console.log(error);
@@ -126,7 +126,7 @@ class HomeSinhVien extends Component {
   }
 
   sendInfo() {
-    console.log("post");
+    //console.log("post");
     let condition = this.validateSendInfo(
       this.state.point1Student,
       this.state.point2Student,
@@ -146,7 +146,7 @@ class HomeSinhVien extends Component {
           { headers: { token: this.state.token } }
         )
         .then(response => {
-          console.log(response.status);
+          //console.log(response.status);
           if (response.status === 200) {
             alert("Đã gửi thành công.");
             this.getAPI();
@@ -164,18 +164,18 @@ class HomeSinhVien extends Component {
 
   componentDidMount() {
     //check da lam don 
-    console.log("didmount");
-    console.log("token " + this.state.token);
-    console.log("role " + this.state.role);
-    console.log("username " + this.state.username);
+    //console.log("didmount");
+    //console.log("token " + this.state.token);
+    //console.log("role " + this.state.role);
+    //console.log("username " + this.state.username);
 
     this.getAPI();
   }
 
   signOut() {
-    console.log(localStorage.getItem("role"));
+    //console.log(localStorage.getItem("role"));
     localStorage.removeItem("role");
-    console.log(localStorage.getItem("role"));
+    //console.log(localStorage.getItem("role"));
     ReactDOM.render(<Login />, document.getElementById("root"));
   }
 
@@ -240,7 +240,7 @@ class HomeSinhVien extends Component {
       <div>
         <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
           <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
-            UET training point
+            Student's Home
           </a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap">
@@ -271,7 +271,7 @@ class HomeSinhVien extends Component {
                 Họ tên : {this.state.student_name} - {this.state.username}
               </h4>
               <br />
-              <h5>Trạng thái đơn</h5>
+              <h5>Trạng thái phiếu điểm</h5>
               <br />
 
               <p>
@@ -300,7 +300,7 @@ class HomeSinhVien extends Component {
                   <thead>
                     <tr>
                       <th scope="col">STT</th>
-                      <th scope="col">Danh sách điểm rèn luyện</th>
+                      <th scope="col">Thành phần điểm</th>
                       <th scope="col">Sinh viên điền</th>
                       <th scope="col">Lớp trưởng điền</th>
                     </tr>
