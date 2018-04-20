@@ -218,7 +218,6 @@ class HomeSinhVien extends Component {
 
     const inputComment = this.state.student_verify ? null : (
       <div>
-        <p>Ghi chú: {this.state.message}</p>
         <p>Viết nhận xét</p>
         <input
           type="text"
