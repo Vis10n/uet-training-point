@@ -57,7 +57,7 @@ class OpenDocument extends Component {
         .then(response => {
           if (response.data.status === "success") {
             console.log("success");
-
+            alert("Đã gửi cho giáo viên.");
             ReactDOM.render(
               <HomeLopTruong role={this.state.role} token={this.state.token} />,
               document.getElementById("root")
@@ -79,36 +79,43 @@ class OpenDocument extends Component {
     if (this.checkSame()) {
       alert("Các điểm đã trùng khớp, không thể từ chối");
     } else {
-      axios
-        .post(
-          "https://training-point.herokuapp.com/reject",
-          {
-            point_id: this.state.pointID,
-            // point1: this.state.point1,
-            point1_monitor: this.state.point1Monitor,
-            // point2: this.state.point2,
-            point2_monitor: this.state.point2Monitor,
-            // point3: this.state.point3,
-            point3_monitor: this.state.point3Monitor,
-            message: this.state.messageNew
-          },
-          { headers: { token: this.state.token } }
-        )
-        .then(response => {
-          //console.log(response);
-          if (response.data.status === "success") {
-            alert("Đã gửi cho sinh viên");
-            ReactDOM.render(
-              <HomeLopTruong role={this.state.role} token={this.state.token} />,
-              document.getElementById("root")
-            );
-          } else {
-            alert("có lỗi xảy ra");
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      if (this.state.messageNew == null) {
+        alert("Bạn chưa ghi lý do từ chối.");
+      } else {
+        axios
+          .post(
+            "https://training-point.herokuapp.com/reject",
+            {
+              point_id: this.state.pointID,
+              // point1: this.state.point1,
+              point1_monitor: this.state.point1Monitor,
+              // point2: this.state.point2,
+              point2_monitor: this.state.point2Monitor,
+              // point3: this.state.point3,
+              point3_monitor: this.state.point3Monitor,
+              message: this.state.messageNew
+            },
+            { headers: { token: this.state.token } }
+          )
+          .then(response => {
+            //console.log(response);
+            if (response.data.status === "success") {
+              alert("Đã gửi cho sinh viên");
+              ReactDOM.render(
+                <HomeLopTruong
+                  role={this.state.role}
+                  token={this.state.token}
+                />,
+                document.getElementById("root")
+              );
+            } else {
+              alert("có lỗi xảy ra");
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
     }
   }
 
@@ -133,9 +140,9 @@ class OpenDocument extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.state.data);
-    //console.log(this.state.token);
-    //console.log(this.state.pointID);
+    console.log(this.state.data);
+    console.log(this.state.token);
+    console.log(this.state.pointID);
   }
 
   validatePoint(point) {
@@ -222,7 +229,7 @@ class OpenDocument extends Component {
                 <h1 class="h2">Phiếu điểm cần phê duyệt</h1>
               </div>
               <h5>Họ và tên: {this.state.data.user_name}</h5>
-              <h6>Ghi chú từ sinh viên: {this.state.messageFromStudent}</h6>
+              <h6>Ghi chú: {this.state.messageFromStudent}</h6>
               <div id="main-monitor">
                 <table className="table table-hover">
                   <thead>
@@ -281,7 +288,7 @@ class OpenDocument extends Component {
 
                 <div className="container">
                   <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-4">
                       <h5>Viết nhận xét</h5>
                       <input
                         type="text"
@@ -291,29 +298,34 @@ class OpenDocument extends Component {
                         onChange={this.handleMessage}
                       />
                     </div>
+                    <div className="col-sm-2" />
                     <div className="col-sm-6">
-                      <h5>
-                        Xác nhận và gưi đơn cho giáo viên{"   "}
-                        <button
-                          type="button"
-                          class="btn btn-success"
-                          onClick={this.sendToTeacher}
-                        >
-                          Xác nhận
-                        </button>
-                      </h5>
-                      <br />
-                      <br />
-                      <h5>
-                        Từ chối và gửi trả cho sinh viên{"   "}
-                        <button
-                          type="button"
-                          onClick={this.sendToStudent}
-                          class="btn btn-danger"
-                        >
-                          Từ chối
-                        </button>
-                      </h5>
+                      <div class="container">
+                        <div class="row">
+                        <div class="col-sm">
+                          <div class="col-sm"> </div>
+                            <br />
+                            <button
+                              type="button"
+                              class="btn btn-success"
+                              onClick={this.sendToTeacher}
+                            >
+                              Xác nhận
+                            </button>
+                          </div>
+                          <div class="col-sm">
+                            <br />
+                            <button
+                              type="button"
+                              onClick={this.sendToStudent}
+                              class="btn btn-danger"
+                            >
+                              Từ chối
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
                       <br />
                     </div>
                   </div>
