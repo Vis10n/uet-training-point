@@ -116,9 +116,9 @@ class HomeSinhVien extends Component {
   }
 
   validateSendInfo(point1, point2, point3) {
-    if (point1 > 0 && point1 <= 100) {
-      if (point2 > 0 && point2 <= 100) {
-        if (point3 > 0 && point3 <= 100) {
+    if (point1 >= 0 && point1 <= 100) {
+      if (point2 >= 0 && point2 <= 100) {
+        if (point3 >= 0 && point3 <= 100) {
           return true;
         }
       }

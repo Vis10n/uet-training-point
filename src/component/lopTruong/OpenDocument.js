@@ -22,9 +22,9 @@ class OpenDocument extends Component {
       point2: this.props.data.point2,
       point3: this.props.data.point3,
 
-      // point1Monitor: this.props.data.point1,
-      // point2Monitor: this.props.data.point2,
-      // point3Monitor: this.props.data.point3,
+      point1Monitor: this.props.data.point1,
+      point2Monitor: this.props.data.point2,
+      point3Monitor: this.props.data.point3,
       messageFromStudent: this.props.data.message,
       isTheSame: true,
       messageNew: null
@@ -143,18 +143,18 @@ class OpenDocument extends Component {
     console.log(this.state.data);
     console.log(this.state.token);
     console.log(this.state.pointID);
-    if (this.props.data.point1_monitor == null) {
+    if (this.props.data.point1_monitor != null) {
       this.setState({
-        point1Monitor : this.props.data.point1
+        point1Monitor : this.props.data.point1_monitor
       })
     }
-    if (this.props.data.point2_monitor == null) {
+    if (this.props.data.point2_monitor != null) {
       this.setState({
-        point2Monitor : this.props.data.point2
+        point2Monitor : this.props.data.point2_monitor
       })
-    }if (this.props.data.point3_monitor == null) {
+    }if (this.props.data.point3_monitor != null) {
       this.setState({
-        point3Monitor : this.props.data.point3
+        point3Monitor : this.props.data.point3_monitor
       })
     }
 
